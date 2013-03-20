@@ -9,7 +9,7 @@ public class KenkenCreator {
 	public static Random rand = new Random();
 	
 	public static void main(String[] args){
-		difficulty = 6;
+		difficulty = 3;
 		int[][] kenken = new int[difficulty][difficulty];
 		String[][] cages = new String[difficulty][difficulty];
 		
