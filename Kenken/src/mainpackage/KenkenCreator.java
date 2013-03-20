@@ -178,7 +178,6 @@ public class KenkenCreator {
 								b[2] = curPuzzle[i][j+1];
 								c[0] = curPuzzle[i+1][j];
 								d = curPuzzle[i+1][j+1];
-								System.err.println("I DID IT " + i + " " + j);
 							} else if(connCells[i+1][j+1] == 0 && connCells[i+1][j] == 0) { //LN (L)
 								possShapes[3] = true;
 								b[3] = curPuzzle[i][j+1];
@@ -215,7 +214,6 @@ public class KenkenCreator {
 							do {
 								genShape = rand.nextInt(7); //picks a random shape to do
 							} while (possShapes[genShape] == false); //only if that shape is possible
-						//System.err.println(genShape);
 						} else {
 							genShape = 7; //do a 1Box
 						}
