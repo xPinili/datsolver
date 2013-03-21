@@ -1,117 +1,104 @@
 package mainpackage;
-/*
+
 import java.awt.*;
 import java.awt.event.*;
-import javax.swing.*;  //notice javax
+import javax.swing.*;
 
-public class Main extends JFrame {
+import java.util.Scanner;
 
-	  JPanel pane = new JPanel();
-	  Main() // the frame constructor method
-	  {
-	    super("My Simple Frame"); setBounds(100,100,300,100);
-	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	    Container con = this.getContentPane(); // inherit main frame
-	    con.add(pane); // add the panel to frame
-	    // customize panel here
-	    // pane.add(someWidget);
-	    setVisible(true); // display this frame
-	  }
-	
-	  public JPanel createContentPane (){
 
-	        // We create a bottom JPanel to place everything on.
-	        JPanel totalGUI = new JPanel();
-	        totalGUI.setLayout(null);
+public class Main {
+	public static int[][] kenken;
+	public static String[][] cages;
+	public static int difficulty;
 
-	        // Creation of a Panel to contain the title labels
-	        JPanel titlePanel = new JPanel();
-	        titlePanel.setLayout(null);
-	        titlePanel.setLocation(10, 0);
-	        titlePanel.setSize(250, 30);
-	        totalGUI.add(titlePanel);
-
-	        JLabel redLabel = new JLabel("Red Team");
-	        redLabel.setLocation(0, 0);
-	        redLabel.setSize(100, 30);
-	        redLabel.setHorizontalAlignment(0);
-	        redLabel.setForeground(Color.red);
-	        titlePanel.add(redLabel);
-
-	        JLabel blueLabel = new JLabel("Blue Team");
-	        blueLabel.setLocation(120, 0);
-	        blueLabel.setSize(100, 30);
-	        blueLabel.setHorizontalAlignment(0);
-	        blueLabel.setForeground(Color.blue);
-	        titlePanel.add(blueLabel);
-
-	        // Creation of a Panel to contain the score labels.
-	        JPanel scorePanel = new JPanel();
-	        scorePanel.setLayout(null);
-	        scorePanel.setLocation(10, 40);
-	        scorePanel.setSize(250, 30);
-	        totalGUI.add(scorePanel);
-
-	        JLabel redScore = new JLabel("0");
-	        redScore.setLocation(0, 0);
-	        redScore.setSize(100, 30);
-	        redScore.setHorizontalAlignment(0);
-	        scorePanel.add(redScore);
-
-	        JLabel blueScore = new JLabel("0");
-	        blueScore.setLocation(120, 0);
-	        blueScore.setSize(100, 30);
-	        blueScore.setHorizontalAlignment(0);
-	        scorePanel.add(blueScore);
-
-	        // Creation of a label to contain all the JButtons.
-	        JPanel buttonPanel = new JPanel();
-	        buttonPanel.setLayout(null);
-	        buttonPanel.setLocation(10, 80);
-	        buttonPanel.setSize(250, 70);
-	        totalGUI.add(buttonPanel);
-
-	        // We create a button and manipulate it using the syntax we have
-	        // used before.
-	        JButton redButton = new JButton("Red Score!");
-	        redButton.setLocation(0, 0);
-	        redButton.setSize(100, 30);
-	        buttonPanel.add(redButton);
-
-	        JButton blueButton = new JButton("Blue Score!");
-	        blueButton.setLocation(120, 0);
-	        blueButton.setSize(100, 30);
-	        buttonPanel.add(blueButton);
-
-	        JButton resetButton = new JButton("Reset Score");
-	        resetButton.setLocation(0, 40);
-	        resetButton.setSize(220, 30);
-	        buttonPanel.add(resetButton); 
-	        
-	        totalGUI.setOpaque(true);
-	        return totalGUI;
-	    }
-	  
-	  private static void createAndShowGUI() {
-
-	        JFrame.setDefaultLookAndFeelDecorated(true);
-	        JFrame frame = new JFrame("[=] JButton Scores! [=]");
-
-	        //Create and set up the content pane.
-	        //ButtonExample demo = new ButtonExample();
-	        //frame.setContentPane(demo.createContentPane());
-
-	        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	        frame.setSize(250, 190);
-	        frame.setVisible(true);
-	    }
-	  
 	public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                createAndShowGUI();
-            }
-        });
+		KenkenCreator createKenken = new KenkenCreator(); //creates a new instance of kenken creator
+		
+		
+		difficulty = 3;
+		
+		
+		
+		
+		kenken = new int[difficulty][difficulty];
+		cages = new String[difficulty][difficulty];
+		
+		
+		//An example of a puzzle in a 3 by 3 format
+		/*        0 1 2
+		 * 
+		 *  0     3 2 1
+		 *  1     2 1 3
+		 *  2     1 3 2
+		 *  
+		 *  NOTE: the first integer (i) for the 2D array is the row number,
+		 *  the second integer (j) is for the specified number in the row
+		 */
+		
+		kenken = createKenken.createPuzzle(kenken, difficulty); //creates a new puzzle
+		
+		
+		
+		//displays solution in console
+		for (int i = 0; i < difficulty; i++) {
+			for (int j = 0; j < difficulty; j++) {
+				System.out.print(kenken[i][j]);
+			}
+			System.out.println();
+		}
+		System.out.println("");
+		
+		cages = createKenken.createCages(kenken, 4, difficulty); //creates the random cages for the puzzle
+
+		System.out.println();
+		for (int i = 0; i < difficulty; i++) {
+			for (int j = 0; j < difficulty; j++) {
+				System.out.print(cages[i][j] + " ");
+			}
+			System.out.println();
+		}
+		
+	}
+	
+	
+	public static String[][] inputProblem(){
+		Scanner input = new Scanner(System.in);
+		String[][] newCages = new String[difficulty][difficulty];
+		
+		System.out.println("Enter the difficulty of the puzzle you are about to input: ");
+		difficulty = input.nextInt();
+		
+		System.out.println("How our puzzles are inputted");
+		System.out.println("--------------------------------------------------------------------------------------------");
+		System.out.println("Code for input: [shape][operator][overall value of cell] \n");
+		System.out.println("Acceptable Shapes:");
+		System.out.println("VBox = Vertical Box (2 Boxes going down)");
+		System.out.println("HBox = Horizonal Box (2 Boxes going across)");
+		System.out.println("LN = L shape, that is orientated regularly (takes up 3 boxes)");
+		System.out.println("LB = L shape, that is orientated backwards (takes up 3 boxes)");
+		System.out.println("LNF = L shape, that is orientated regularly and flipped (takes up 3 boxes)");
+		System.out.println("LBF = L shape, that is orientated backwards and flipped (takes up 3 boxes)");
+		System.out.println("1Box = 1 box\n");
+		System.out.println("Acceptable Operators:");
+		System.out.println("+ (Addition)");
+		System.out.println("- (Subtraction)");
+		System.out.println("/ (Division)");
+		System.out.println("* (Multiplication)\n");
+		System.out.println("Accepted Overall Values:");
+		System.out.println("-Has to be the value when all numbers in that cage are calculated with that cages' operator.\n");
+		System.out.println("Sample Input: For a 3 by 3 Puzzle:");
+		System.out.println("VBox-1 -> VBox+3 -> VBox/3 -> VBox-1 -> VBox+3 -> VBox/3 -> HBox+4 -> HBox+4  -> 1Box2 ");
+		System.out.println("--------------------------------------------------------------------------------------------");
+		
+		for(int i=0; i<(difficulty); i++){
+			for(int j=0; j<(difficulty); j++){
+				System.out.println("Enter a value for position (" + (i+1) + ", " + (j+1) + "): ");
+				newCages[i][j] = input.nextLine();
+			}
+		}
+		input.close();
+		
+		return newCages;
 	}
 }
-*/
