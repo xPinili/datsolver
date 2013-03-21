@@ -69,7 +69,7 @@ public class Main {
 		System.out.println("Enter the difficulty of the puzzle you are about to input: ");
 		difficulty = input.nextInt();
 		
-		System.out.println("How our puzzles are inputted");
+		System.out.println("How our puzzles are inputted:");
 		System.out.println("--------------------------------------------------------------------------------------------");
 		System.out.println("Code for input: [shape][operator][overall value of cell] \n");
 		System.out.println("Acceptable Shapes:");
