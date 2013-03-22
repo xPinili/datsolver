@@ -1,3 +1,10 @@
+package mainpackage;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JOptionPane;
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -8,8 +15,16 @@
  * @author Nerman Nicholas
  */
 public class NewJFrame extends javax.swing.JFrame {
+	
+	private static final long serialVersionUID = 7663836813372888422L;
+
+	public static KenkenCreator createKenken; //creates a new instance of kenken creator
+	
 
     /**
+	 * 
+	 */
+	/**
      * Creates new form NewJFrame
      */
     public NewJFrame() {
@@ -35,9 +50,11 @@ public class NewJFrame extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         diffList = new javax.swing.JList();
         newPuzzleButton = new javax.swing.JButton();
-        jLabel83 = new javax.swing.JLabel();
         checkButton = new javax.swing.JButton();
+        
+        jLabel83 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
+        
         hg8 = new javax.swing.JSeparator();
         g7 = new javax.swing.JLabel();
         b9 = new javax.swing.JLabel();
@@ -1108,6 +1125,90 @@ public class NewJFrame extends javax.swing.JFrame {
 
         g4.setText("...");
 
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+     
+        
+
+        
+        
+        newPuzzleButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e)
+            {
+            	int intDiff = diffList.getLeadSelectionIndex();
+            	System.out.println("Setted difficulty:" + (intDiff+3));
+            	newPuzzle(intDiff);
+            	
+
+            	a1.setText(createKenken.cages[0][0]);
+            	
+            	
+            }
+        }); 
+        
+        checkButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e)
+            {
+            	
+            }
+        }); 
+        
+        hintButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e)
+            {
+                
+            }
+        }); 
+        
+        solutionButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e)
+            {
+                
+            }
+        }); 
+
+        
+        rageQuitButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e)
+            {
+                System.exit(0);
+            }
+        }); 
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -2479,6 +2580,7 @@ public class NewJFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
     /**
      * @param args the command line arguments
      */
@@ -2834,4 +2936,58 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JSeparator vi7;
     private javax.swing.JSeparator vi8;
     // End of variables declaration//GEN-END:variables
+    
+    
+    
+    
+    public static void newPuzzle(int diff) {
+
+    	if (diff == -1) {
+    		JOptionPane.showMessageDialog(null, "No puzzle has been selected. Please select a puzzle.", "Puzzle not selected.", JOptionPane.ERROR_MESSAGE);
+    	} else {
+    		diff = diff + 3;
+
+    		createKenken = new KenkenCreator(diff); //creates a new instance of kenken creator
+
+    		createKenken.kenken = createKenken.createPuzzle(createKenken.kenken); //creates a new puzzle
+
+
+
+    		//displays solution in console
+    		for (int i = 0; i < createKenken.difficulty; i++) {
+    			for (int j = 0; j < createKenken.difficulty; j++) {
+    				System.out.print(createKenken.kenken[i][j]);
+    			}
+    			System.out.println();
+    		}
+    		System.out.println("");
+
+    		createKenken.cages = createKenken.createCages(createKenken.kenken, 4); //creates the random cages for the puzzle
+
+    		System.out.println();
+    		for (int i = 0; i < createKenken.difficulty; i++) {
+    			for (int j = 0; j < createKenken.difficulty; j++) {
+    				System.out.print(createKenken.cages[i][j] + " ");
+    			}
+    			System.out.println();
+    		}
+    	}
+    	
+    	
+    }
+
+    
+    
+    public static void displayPuzzle() {
+    	
+    }
+    
+    
+    
+    public static void displaySolution() {
+    	
+    }
 }
+
+
+

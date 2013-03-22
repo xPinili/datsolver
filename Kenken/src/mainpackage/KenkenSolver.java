@@ -11,7 +11,7 @@ package mainpackage;
  * Step 4:  Find VBoxes and HBoxes, 
  */
 
-
+/*
 public class KenkenSolver {
 	
 	public int[][] solvePuzzle(String[][] currCages, int difficulty) {
@@ -30,10 +30,9 @@ public class KenkenSolver {
 		}
 
 		boolean solved, cannotSolve;
-		String prev
+		String lastPossNumbers[][] = new String[difficulty][difficulty];
 		int samePuzzle;
 		do {
-			
 			
 			
 			
@@ -45,9 +44,16 @@ public class KenkenSolver {
 		return solPuzzle;
 	}
 	
-	public static rev1BoxNum(possNumbers)
+	public static int[][] rem1BoxNum(int[][] possNumbers, int difficulty) {
+		
+		for (int i = 0; i < difficulty; i++) {
+			
+		}
+		return possNumbers;
+	}
 	
 	
 	
 	
 }
+*/

@@ -3,9 +3,23 @@ package mainpackage;
 
 import java.util.Random;
 
-
 public class KenkenCreator {
+
 	public static Random rand = new Random();
+	public static int difficulty;
+	public int[][] kenken;
+	public String[][] cages;
+
+	public KenkenCreator(int diff) {
+		difficulty = diff;
+		kenken = new int[difficulty][difficulty];
+		cages = new String[difficulty][difficulty];
+	}
+	public KenkenCreator() {
+		difficulty = 3;
+		kenken = new int[difficulty][difficulty];
+		cages = new String[difficulty][difficulty];
+	}
 	
 	//----------------------------------------------------------------------------
 	/* Algorithm for creating a (unique) random solution for a Kenken puzzle
@@ -13,14 +27,14 @@ public class KenkenCreator {
 	 * Step 2: Check if the current row is conflicting with another row in the puzzle
 	 * Step 3: If the current row is being conflicted, use a new unique row
 	 */
-	public int[][] createPuzzle(int[][] curPuzzle, int difficulty) {
+	public int[][] createPuzzle(int[][] curPuzzle) {
 		boolean conflictRow = false;
 		int temp[]; //creates a temporary row
 		
 		for(int i = 0; i < difficulty; i++) {
 			do {
 				conflictRow = false;
-				temp = createRow(difficulty);
+				temp = createRow();
 				for(int j = 0; j < i; j++) {
 					for (int checkX = 0; checkX < difficulty; checkX++) {
 						//Step 2 - Check if the current row is conflicting
@@ -36,7 +50,7 @@ public class KenkenCreator {
 	}
 	
 	//Step 1 - Create a unique row with unique numbers
-	public static int[] createRow(int difficulty) {
+	public static int[] createRow() {
 		int[] newUniqueRow = new int[difficulty];
 		boolean conflict = false; //checks if there is a conflicting number
 		int temp; //creates a temporary number
@@ -66,7 +80,7 @@ public class KenkenCreator {
 	 * Step 3: Get the number produced from the operator
 	 * Step 4: Place the String Code for all currCages
 	 */
-	public String[][] createCages(int[][] curPuzzle, int numOfOper, int difficulty) {
+	public String[][] createCages(int[][] curPuzzle, int numOfOper) {
 		String[][] currCages = new String[difficulty][difficulty]; //Keeps track of the type of cage for each cell
 		int[][] connCells = new int[difficulty][difficulty]; //Keeps track of what cells are connected to represent a cage
 		
