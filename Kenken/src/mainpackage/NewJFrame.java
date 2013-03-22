@@ -1192,7 +1192,7 @@ public class NewJFrame extends javax.swing.JFrame {
             		JLabel labels[] = {a1, a2, a3, a4, a5, a6, a7, a8, a9, b1, b2, b3, b4, b5, b6, b7, b8, b9,  c1, c2, c3, c4, c5, c6, c7, c8, c9, d1, d2, d3, d4, d5, d6, d7, d8, d9, e1, e2, e3, e4, e5, e6, e7, e8, e9, f1, f2, f3, f4, f5, f6, f7, f8, f9,  g1, g2, g3, g4, g5, g6, g7, g8, g9,  h1, h2, h3, h4, h5, h6, h7, h8, h9,  i1, i2, i3, i4, i5, i6, i7, i8, i9};
             		
             		JSeparator verSeps[] = {va1, va2, va3, va4, va5, va6, va7, va8, vb1, vb2, vb3, vb4, vb5, vb6, vb7, vb8,  vc1, vc2, vc3, vc4, vc5, vc6, vc7, vc8, vd1, vd2, vd3, vd4, vd5, vd6, vd7, vd8, ve1, ve2, ve3, ve4, ve5, ve6, ve7, ve8, vf1, vf2, vf3, vf4, vf5, vf6, vf7, vf8, vg1, vg2, vg3, vg4, vg5, vg6, vg7, vg8, vh1, vh2, vh3, vh4, vh5, vh6, vh7, vh8, vi1, vi2, vi3, vi4, vi5, vi6, vi7, vi8};
-            		
+            		JSeparator horSeps[] = {ha1, ha2, ha3, ha4, ha5, ha6, ha7, ha8, ha9, hb1, hb2, hb3, hb4, hb5, hb6, hb7, hb8, hb9,  hc1, hc2, hc3, hc4, hc5, hc6, hc7, hc8, hc9, hd1, hd2, hd3, hd4, hd5, hd6, hd7, hd8, hd9, he1, he2, he3, he4, he5, he6, he7, he8, he9, hf1, hf2, hf3, hf4, hf5, hf6, hf7, hf8, hf9,  hg1, hg2, hg3, hg4, hg5, hg6, hg7, hg8, hg9,  hh1, hh2, hh3, hh4, hh5, hh6, hh7, hh8, hh9};
             		
             		for (TextField txtBox : txtBoxes) {
             			int rowNum = 0, colNum = 0;
