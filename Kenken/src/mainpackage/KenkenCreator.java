@@ -9,16 +9,20 @@ public class KenkenCreator {
 	public static int difficulty;
 	public int[][] kenken;
 	public String[][] cages;
+	public int[][] connCells; //Keeps track of what cells are connected to represent a cage
+	
 
 	public KenkenCreator(int diff) {
 		difficulty = diff;
 		kenken = new int[difficulty][difficulty];
 		cages = new String[difficulty][difficulty];
+		connCells = new int[difficulty][difficulty];
 	}
 	public KenkenCreator() {
 		difficulty = 3;
 		kenken = new int[difficulty][difficulty];
 		cages = new String[difficulty][difficulty];
+		connCells = new int[difficulty][difficulty];
 	}
 	
 	//----------------------------------------------------------------------------
@@ -82,7 +86,6 @@ public class KenkenCreator {
 	 */
 	public String[][] createCages(int[][] curPuzzle, int numOfOper) {
 		String[][] currCages = new String[difficulty][difficulty]; //Keeps track of the type of cage for each cell
-		int[][] connCells = new int[difficulty][difficulty]; //Keeps track of what cells are connected to represent a cage
 		
 		int currCageNum = 0;
 		//int numOfCages = (int)(((difficulty * difficulty) / 2) - ((Math.random() * difficulty) - (int)(difficulty / 2))); //Creates a random number of cages corresponding to the difficulty
