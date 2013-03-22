@@ -8,7 +8,8 @@ import java.util.Scanner;
 
 
 public class Main {
-
+	public static boolean visPuzzle;
+	
 	public static void main(String[] args) {
 		
 		
@@ -27,6 +28,7 @@ public class Main {
 
 		NewJFrame frame = new NewJFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setPreferredSize(new Dimension(916, 727));
 		//frame.setContentPane(new Main());
 		
 		frame.setVisible(true);

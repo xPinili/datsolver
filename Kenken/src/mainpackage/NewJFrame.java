@@ -1,5 +1,8 @@
 package mainpackage;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,6 +10,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JSeparator;
+
+import java.util.Random;
 
 /*
  * To change this template, choose Tools | Templates
@@ -22,7 +27,8 @@ public class NewJFrame extends javax.swing.JFrame {
 	private static final long serialVersionUID = 7663836813372888422L;
 
 	public static KenkenCreator createKenken; //creates a new instance of kenken creator
-	public static boolean visPuzzle = false;
+	public static int[][] hint;
+	public static boolean visPuzzle;
 
 
     /**
@@ -32,6 +38,7 @@ public class NewJFrame extends javax.swing.JFrame {
      * Creates new form NewJFrame
      */
     public NewJFrame() {
+    	visPuzzle = false;
         initComponents();
     }
 
@@ -58,6 +65,8 @@ public class NewJFrame extends javax.swing.JFrame {
         
         jLabel83 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
+        
+        jPanel2.setPreferredSize(new Dimension(525, 677));
         
         hg8 = new javax.swing.JSeparator();
         g7 = new javax.swing.JLabel();
@@ -1133,76 +1142,218 @@ public class NewJFrame extends javax.swing.JFrame {
         
         
         
+        JLabel labels[] = {a1, a2, a3, a4, a5, a6, a7, a8, a9, b1, b2, b3, b4, b5, b6, b7, b8, b9,  c1, c2, c3, c4, c5, c6, c7, c8, c9, d1, d2, d3, d4, d5, d6, d7, d8, d9, e1, e2, e3, e4, e5, e6, e7, e8, e9, f1, f2, f3, f4, f5, f6, f7, f8, f9,  g1, g2, g3, g4, g5, g6, g7, g8, g9,  h1, h2, h3, h4, h5, h6, h7, h8, h9,  i1, i2, i3, i4, i5, i6, i7, i8, i9};
+        
+        /*
+        //setting preferred size
+		TextField txtBoxes[] = {ta1, ta2, ta3, ta4, ta5, ta6, ta7, ta8, ta9, tb1, tb2, tb3, tb4, tb5, tb6, tb7, tb8, tb9,  tc1, tc2, tc3, tc4, tc5, tc6, tc7, tc8, tc9, td1, td2, td3, td4, td5, td6, td7, td8, td9, te1, te2, te3, te4, te5, te6, te7, te8, te9, tf1, tf2, tf3, tf4, tf5, tf6, tf7, tf8, tf9,  tg1, tg2, tg3, tg4, tg5, tg6, tg7, tg8, tg9,  th1, th2, th3, th4, th5, th6, th7, th8, th9,  ti1, ti2, ti3, ti4, ti5, ti6, ti7, ti8, ti9};
+		JSeparator verSeps[] = {va1, va2, va3, va4, va5, va6, va7, va8, vb1, vb2, vb3, vb4, vb5, vb6, vb7, vb8,  vc1, vc2, vc3, vc4, vc5, vc6, vc7, vc8, vd1, vd2, vd3, vd4, vd5, vd6, vd7, vd8, ve1, ve2, ve3, ve4, ve5, ve6, ve7, ve8, vf1, vf2, vf3, vf4, vf5, vf6, vf7, vf8, vg1, vg2, vg3, vg4, vg5, vg6, vg7, vg8, vh1, vh2, vh3, vh4, vh5, vh6, vh7, vh8, vi1, vi2, vi3, vi4, vi5, vi6, vi7, vi8};
+		JSeparator horSeps[] = {ha1, ha2, ha3, ha4, ha5, ha6, ha7, ha8, ha9, hb1, hb2, hb3, hb4, hb5, hb6, hb7, hb8, hb9,  hc1, hc2, hc3, hc4, hc5, hc6, hc7, hc8, hc9, hd1, hd2, hd3, hd4, hd5, hd6, hd7, hd8, hd9, he1, he2, he3, he4, he5, he6, he7, he8, he9, hf1, hf2, hf3, hf4, hf5, hf6, hf7, hf8, hf9,  hg1, hg2, hg3, hg4, hg5, hg6, hg7, hg8, hg9,  hh1, hh2, hh3, hh4, hh5, hh6, hh7, hh8, hh9};
+		
+		//set default size
+        for (TextField txtBox : txtBoxes) {
+        	txtBox.setPreferredSize(new Dimension(45, 45));
+        }
+        for (JLabel label : labels) {
+        	label.setPreferredSize(new Dimension(45, 14));
+        }
+        for (JSeparator verSep : verSeps) {
+        	verSep.setPreferredSize(new Dimension(2, 59));
+        }
         
         
+        //for (JSeparator horSep : horSeps) {
+        	//horSep.setPreferredSize(new Dimension(45, 5));
+        //}
+        
+        */
         
         
+        //default fonts
+        for (JLabel label : labels) {
+        	label.setFont(new Font("Tahoma",Font.PLAIN,9));
+        }
         
-        
-        
-        
-        
-        
-        
-     
-        
-
         
         
         newPuzzleButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e)
             {
         		int intDiff = diffList.getLeadSelectionIndex();
-            	if (intDiff == -1) {
+            	if (intDiff <= -1) {
             		JOptionPane.showMessageDialog(null, "No puzzle has been selected. Please select a puzzle.", "Puzzle not selected.", JOptionPane.ERROR_MESSAGE);
             	} else {
             		TextField txtBoxes[] = {ta1, ta2, ta3, ta4, ta5, ta6, ta7, ta8, ta9, tb1, tb2, tb3, tb4, tb5, tb6, tb7, tb8, tb9,  tc1, tc2, tc3, tc4, tc5, tc6, tc7, tc8, tc9, td1, td2, td3, td4, td5, td6, td7, td8, td9, te1, te2, te3, te4, te5, te6, te7, te8, te9, tf1, tf2, tf3, tf4, tf5, tf6, tf7, tf8, tf9,  tg1, tg2, tg3, tg4, tg5, tg6, tg7, tg8, tg9,  th1, th2, th3, th4, th5, th6, th7, th8, th9,  ti1, ti2, ti3, ti4, ti5, ti6, ti7, ti8, ti9};
+            		JLabel labels[] = {a1, a2, a3, a4, a5, a6, a7, a8, a9, b1, b2, b3, b4, b5, b6, b7, b8, b9,  c1, c2, c3, c4, c5, c6, c7, c8, c9, d1, d2, d3, d4, d5, d6, d7, d8, d9, e1, e2, e3, e4, e5, e6, e7, e8, e9, f1, f2, f3, f4, f5, f6, f7, f8, f9,  g1, g2, g3, g4, g5, g6, g7, g8, g9,  h1, h2, h3, h4, h5, h6, h7, h8, h9,  i1, i2, i3, i4, i5, i6, i7, i8, i9};
+            		JSeparator verSeps[] = {va1, va2, va3, va4, va5, va6, va7, va8, vb1, vb2, vb3, vb4, vb5, vb6, vb7, vb8,  vc1, vc2, vc3, vc4, vc5, vc6, vc7, vc8, vd1, vd2, vd3, vd4, vd5, vd6, vd7, vd8, ve1, ve2, ve3, ve4, ve5, ve6, ve7, ve8, vf1, vf2, vf3, vf4, vf5, vf6, vf7, vf8, vg1, vg2, vg3, vg4, vg5, vg6, vg7, vg8, vh1, vh2, vh3, vh4, vh5, vh6, vh7, vh8, vi1, vi2, vi3, vi4, vi5, vi6, vi7, vi8};
+            		JSeparator horSeps[] = {ha1, ha2, ha3, ha4, ha5, ha6, ha7, ha8, ha9, hb1, hb2, hb3, hb4, hb5, hb6, hb7, hb8, hb9,  hc1, hc2, hc3, hc4, hc5, hc6, hc7, hc8, hc9, hd1, hd2, hd3, hd4, hd5, hd6, hd7, hd8, hd9, he1, he2, he3, he4, he5, he6, he7, he8, he9, hf1, hf2, hf3, hf4, hf5, hf6, hf7, hf8, hf9,  hg1, hg2, hg3, hg4, hg5, hg6, hg7, hg8, hg9,  hh1, hh2, hh3, hh4, hh5, hh6, hh7, hh8, hh9};
             		
-            		System.out.println("Setted difficulty:" + (intDiff+3));
+            		intDiff = intDiff + 3;
+            		
+            		System.out.println("difficulty set to: " + intDiff);
             		newPuzzle(intDiff);
 
-
+            		//clears and generates proper textboxes
             		for (TextField txtBox : txtBoxes) {
-            			txtBox.setText("1");
+            			txtBox.setText("");
+            			txtBox.setVisible(true);
             		}
+            		for(int i = 0; i < 9; i++) {
+            			for(int j = 0; j < 9; j++) {
+                			if (!(i < intDiff && j < intDiff)) {
+                				txtBoxes[(i*9)+j].setVisible(false);
+                			}
+                		}
+            		}
+            		
+            		//adds label names
+            		int intCage = 0;
+            		for(int i = 0; i < intDiff; i++){
+            			for(int j = 0; j < intDiff; j++){
+                			if (intCage < createKenken.connCells[i][j]) {
+                				labels[(i*9)+j].setText(createKenken.cages[i][j]);
+                				
+                				/*
+                				if (createKenken.cages[i][j].indexOf('+') != -1)
+                					labels[(i*9)+j].setText(createKenken.cages[i][j].substring(createKenken.cages[i][j].indexOf('+'), createKenken.cages[i][j].length()));
+                				else if (createKenken.cages[i][j].indexOf('*') != -1)
+                					labels[(i*9)+j].setText(createKenken.cages[i][j].substring(createKenken.cages[i][j].indexOf('*'), createKenken.cages[i][j].length()));
+                				else if (createKenken.cages[i][j].indexOf('-') != -1)
+                					labels[(i*9)+j].setText(createKenken.cages[i][j].substring(createKenken.cages[i][j].indexOf('-'), createKenken.cages[i][j].length()));
+                				else if (createKenken.cages[i][j].indexOf('/') != -1)
+                					labels[(i*9)+j].setText(createKenken.cages[i][j].substring(createKenken.cages[i][j].indexOf('/'), createKenken.cages[i][j].length()));
+                				*/
+                				
+                				intCage++;
+                			} else {
+                				labels[(i*9)+j].setText("...");
+                			}
+                		}
+            		}
+            		
+            		
+            		/*
+            		
+            		//configs cages to right orientation
+            		int lastCage = 0;
+            		//vertical separators
+            		for (JSeparator verSep : verSeps){
+    					verSep.setBackground(Color.LIGHT_GRAY);
+    					verSep.setVisible(false);
+            		}
+            		for(int i = 0; i < intDiff; i++){
+                		lastCage = createKenken.connCells[i][0];
+            			for(int j = 1; j < intDiff; j++){
+            				intCage = createKenken.connCells[i][j];
+            				verSeps[(i*9)+j - 1].setVisible(true);
+            				if (lastCage != intCage){
+                				verSeps[(i*9)+j - 1].setBackground(Color.BLACK);
+                				verSeps[(i*9)+j - 1].setVisible(true);
+                				lastCage = intCage;
+            					System.err.println(i + ", " + (j-1));
+            				}
+                		}
+            		}
+					System.err.println("CHANGE");
+            		//horizontal separators
+					for (JSeparator horSep : horSeps){
+						horSep.setBackground(Color.LIGHT_GRAY);
+						horSep.setVisible(false);
+            		}
+            		for(int i = 0; i < intDiff; i++){
+                		lastCage = createKenken.connCells[0][i];
+            			for(int j = 1; j < intDiff; j++){
+            				intCage = createKenken.connCells[j][i];
+        					horSeps[(j*9)+i - 1].setVisible(true);
+            				if (lastCage != intCage){
+            					horSeps[(j*9)+i - 1].setBackground(Color.BLACK);
+            					horSeps[(j*9)+i - 1].setVisible(true);
+                				lastCage = intCage;
+            					System.err.println((j-1) + ", " + i);
+            				}
+                		}
+            		}
+            		 */
+        			hintButton.setEnabled(true);
+        			solutionButton.setEnabled(true);
+        			checkButton.setEnabled(true);
             	}
-
-
             }
         }); 
         
         checkButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e)
             {
-            	
+            	if (visPuzzle == false) {
+            		JOptionPane.showMessageDialog(null, "Cannot check if puzzle is correct because no puzzle was created. \nTo create a new puzzle, click \"New Puzzle\". ", "No puzzle to solve.", JOptionPane.ERROR_MESSAGE);
+            	} else {
+            		TextField txtBoxes[] = {ta1, ta2, ta3, ta4, ta5, ta6, ta7, ta8, ta9, tb1, tb2, tb3, tb4, tb5, tb6, tb7, tb8, tb9,  tc1, tc2, tc3, tc4, tc5, tc6, tc7, tc8, tc9, td1, td2, td3, td4, td5, td6, td7, td8, td9, te1, te2, te3, te4, te5, te6, te7, te8, te9, tf1, tf2, tf3, tf4, tf5, tf6, tf7, tf8, tf9,  tg1, tg2, tg3, tg4, tg5, tg6, tg7, tg8, tg9,  th1, th2, th3, th4, th5, th6, th7, th8, th9,  ti1, ti2, ti3, ti4, ti5, ti6, ti7, ti8, ti9};
+            		
+            		boolean blnCorrect = true;
+            		exit : for(int i = 0; i < createKenken.difficulty; i++) {
+            			for(int j = 0; j < createKenken.difficulty; j++) {
+            				if ((!(txtBoxes[(i*9)+j].getText().matches(".*\\d.*"))) || txtBoxes[(i*9)+j].getText().length() > 1) {
+            					JOptionPane.showMessageDialog(null, "Cannot check because one or more of the textboxes are filled in incorrectly.", "Error", JOptionPane.ERROR_MESSAGE);
+            					blnCorrect = false;
+            					break exit;
+            				}
+            				if (!(createKenken.kenken[i][j] == Integer.parseInt(txtBoxes[(i*9)+j].getText())))
+            						blnCorrect = false;
+                		}
+            		}
+            		if (blnCorrect == true) {
+            			hintButton.setEnabled(false);
+            			solutionButton.setEnabled(false);
+            			checkButton.setEnabled(false);
+            			
+                		JOptionPane.showMessageDialog(null, "Congratulations! You've solved the puzzle! \nTo create a new puzzle, click \"New Puzzle\". ", "Puzzle solved.", JOptionPane.INFORMATION_MESSAGE);
+            		} else if (blnCorrect == false) {
+                		JOptionPane.showMessageDialog(null, "Puzzle has not been solved. \nTo create a new puzzle, click \"New Puzzle\". ", "Puzzle not solved.", JOptionPane.INFORMATION_MESSAGE);
+            		}
+            	}
             }
         }); 
         
         hintButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e)
             {
+            	if (visPuzzle == false) {
+            		JOptionPane.showMessageDialog(null, "No hint can be given because no puzzle was created. \nTo create a new puzzle, click \"New Puzzle\" ", "No puzzle to solve.", JOptionPane.ERROR_MESSAGE);
+            	} else {
+            		Random rand = new Random();
+            		int x = rand.nextInt(createKenken.difficulty), y = rand.nextInt(createKenken.difficulty);
+
+            		JOptionPane.showMessageDialog(null, "At row " + (x+1) + " and at column " + (y+1) + " is number " + createKenken.kenken[x][y] + ".", "Hint", JOptionPane.INFORMATION_MESSAGE);
+            	}
             }
         }); 
         
         solutionButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e)
             {
-            	if (visPuzzle = true) {
+            	if (visPuzzle == false) {
+            		JOptionPane.showMessageDialog(null, "No solution is set because no puzzle was created. \nTo create a new puzzle, click \"New Puzzle\" ", "No puzzle to solve.", JOptionPane.ERROR_MESSAGE);
+            	} else {
             		TextField txtBoxes[] = {ta1, ta2, ta3, ta4, ta5, ta6, ta7, ta8, ta9, tb1, tb2, tb3, tb4, tb5, tb6, tb7, tb8, tb9,  tc1, tc2, tc3, tc4, tc5, tc6, tc7, tc8, tc9, td1, td2, td3, td4, td5, td6, td7, td8, td9, te1, te2, te3, te4, te5, te6, te7, te8, te9, tf1, tf2, tf3, tf4, tf5, tf6, tf7, tf8, tf9,  tg1, tg2, tg3, tg4, tg5, tg6, tg7, tg8, tg9,  th1, th2, th3, th4, th5, th6, th7, th8, th9,  ti1, ti2, ti3, ti4, ti5, ti6, ti7, ti8, ti9};
             		JLabel labels[] = {a1, a2, a3, a4, a5, a6, a7, a8, a9, b1, b2, b3, b4, b5, b6, b7, b8, b9,  c1, c2, c3, c4, c5, c6, c7, c8, c9, d1, d2, d3, d4, d5, d6, d7, d8, d9, e1, e2, e3, e4, e5, e6, e7, e8, e9, f1, f2, f3, f4, f5, f6, f7, f8, f9,  g1, g2, g3, g4, g5, g6, g7, g8, g9,  h1, h2, h3, h4, h5, h6, h7, h8, h9,  i1, i2, i3, i4, i5, i6, i7, i8, i9};
             		
             		JSeparator verSeps[] = {va1, va2, va3, va4, va5, va6, va7, va8, vb1, vb2, vb3, vb4, vb5, vb6, vb7, vb8,  vc1, vc2, vc3, vc4, vc5, vc6, vc7, vc8, vd1, vd2, vd3, vd4, vd5, vd6, vd7, vd8, ve1, ve2, ve3, ve4, ve5, ve6, ve7, ve8, vf1, vf2, vf3, vf4, vf5, vf6, vf7, vf8, vg1, vg2, vg3, vg4, vg5, vg6, vg7, vg8, vh1, vh2, vh3, vh4, vh5, vh6, vh7, vh8, vi1, vi2, vi3, vi4, vi5, vi6, vi7, vi8};
             		JSeparator horSeps[] = {ha1, ha2, ha3, ha4, ha5, ha6, ha7, ha8, ha9, hb1, hb2, hb3, hb4, hb5, hb6, hb7, hb8, hb9,  hc1, hc2, hc3, hc4, hc5, hc6, hc7, hc8, hc9, hd1, hd2, hd3, hd4, hd5, hd6, hd7, hd8, hd9, he1, he2, he3, he4, he5, he6, he7, he8, he9, hf1, hf2, hf3, hf4, hf5, hf6, hf7, hf8, hf9,  hg1, hg2, hg3, hg4, hg5, hg6, hg7, hg8, hg9,  hh1, hh2, hh3, hh4, hh5, hh6, hh7, hh8, hh9};
             		
-            		for (TextField txtBox : txtBoxes) {
-            			int rowNum = 0, colNum = 0;
-            			txtBox.setText("");
-            			if (rowNum < createKenken.difficulty)
-                			txtBox.setText("");
+                	for(int i = 0; i < 9; i++) {
+            			for(int j = 0; j < 9; j++) {
+                			if (i < createKenken.difficulty && j < createKenken.difficulty) {
+                				txtBoxes[(i*9)+j].setText(""+createKenken.kenken[i][j]);
+                			}
+                		}
             		}
-            	} else {
-            		JOptionPane.showMessageDialog(null, "No solution is set because no puzzle was created. \nTo create a new puzzle, click \"New Puzzle\" ", "No puzzle to solve.", JOptionPane.ERROR_MESSAGE);
-            	}
+
+        			hintButton.setEnabled(false);
+        			solutionButton.setEnabled(false);
+        			checkButton.setEnabled(false);
+        			
+            		JOptionPane.showMessageDialog(null, "Solution has been given out. \nTo create a new puzzle, click \"New Puzzle\". ", "Solution given", JOptionPane.INFORMATION_MESSAGE);
+                }
             	
             }
         }); 
@@ -2611,6 +2762,8 @@ public class NewJFrame extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+    	
+    	
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -2967,13 +3120,12 @@ public class NewJFrame extends javax.swing.JFrame {
     
     
     public static void newPuzzle(int diff) {
-    		diff = diff + 3;
-
     		createKenken = new KenkenCreator(diff); //creates a new instance of kenken creator
 
     		createKenken.kenken = createKenken.createPuzzle(createKenken.kenken); //creates a new puzzle
+    		createKenken.cages = createKenken.createCages(createKenken.kenken, 4); //creates the random cages for the puzzle
 
-
+    		/*
 
     		//displays solution in console
     		for (int i = 0; i < createKenken.difficulty; i++) {
@@ -2984,7 +3136,6 @@ public class NewJFrame extends javax.swing.JFrame {
     		}
     		System.out.println("");
 
-    		createKenken.cages = createKenken.createCages(createKenken.kenken, 4); //creates the random cages for the puzzle
 
     		System.out.println();
     		for (int i = 0; i < createKenken.difficulty; i++) {
@@ -3002,6 +3153,7 @@ public class NewJFrame extends javax.swing.JFrame {
     			}
     			System.out.println();
     		}
+    		*/
     		
     		visPuzzle = true;
     }
